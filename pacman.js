@@ -1310,7 +1310,7 @@ function cargarEstadoJuego() {
 const socket = new WebSocket("wss://socketsbay.com/wss/v2/1/demo/")
 
 socket.addEventListener("open", function (event){
-    socket.send("Hello World!");
+    socket.send("Hello World! F");
 });
 
 socket.addEventListener("message", function (event){
