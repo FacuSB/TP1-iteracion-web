@@ -24,6 +24,44 @@
       h1 { font-family: BDCartoonShoutRegular; text-align:center; }
       body { width:342px; margin:0px auto; font-family:sans-serif; }
       a { text-decoration:none; }
+
+      /* Estilos para el contenedor principal */
+      .container {
+          display: flex;
+          justify-content: space-between;
+      }
+
+
+
+      /* Estilos para la tabla */
+      table {
+          height:450px;
+          width:500px; /* Porcentaje ajustable según tus necesidades */
+          border-collapse: collapse;
+          overflow: hidden;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          border: 1px solid #dddddd;
+      }
+
+      th, td {
+          border: none;
+          text-align: left;
+          padding: 8px;
+      }
+
+      th {
+          background-color: #4CAF50;
+          color: white;
+          font-weight: bold;
+      }
+
+      tr:nth-child(even) {
+          background-color: #f2f2f2;
+      }
+
+      tr:hover {
+          background-color: #ddd;
+      }
     </style>
 
 </head>
@@ -32,10 +70,56 @@
   
   <div id="shim">shim for font face</div>
 
-  <h1>HTML Pacman</h1>
-
   <a href="https://github.com/FacuSB/TP1-iteracion-web.git">Github</a>
-  <div id="pacman"></div>
+  <div class="container">
+    <div class="main-div">
+        <h1>HTML Pacman</h1>
+        <div id="pacman"></div>
+    </div>
+    <table id="tabla-puntuaciones">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Puntuación</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Aquí se añadirán las filas de la tabla mediante JavaScript -->
+        </tbody>
+    </table>
+</div>
+<script>
+    // Datos de ejemplo de puntuaciones
+    const puntuaciones = [
+        { nombre: "Usuario1", puntuacion: 100 },
+        { nombre: "Usuario2", puntuacion: 80 }
+    ];
+
+    // Función para mostrar las puntuaciones en la tabla
+    function mostrarPuntuaciones() {
+        const tabla = document.getElementById("tabla-puntuaciones");
+        const tbody = tabla.querySelector("tbody");
+
+        // Limpiamos el cuerpo de la tabla
+        tbody.innerHTML = "";
+
+        // Iteramos sobre las puntuaciones y agregamos filas a la tabla
+        puntuaciones.forEach((puntuacion, index) => {
+            const fila = document.createElement("tr");
+            if (index % 2 === 0) {
+                fila.classList.add("fila-par");
+            }
+            fila.innerHTML = `
+                <td>${puntuacion.nombre}</td>
+                <td>${puntuacion.puntuacion}</td>
+            `;
+            tbody.appendChild(fila);
+        });
+    }
+
+    // Llamamos a la función para mostrar las puntuaciones cuando se cargue la página
+    document.addEventListener("DOMContentLoaded", mostrarPuntuaciones);
+</script>
   <script src="pacman.js"></script>
   <script src="modernizr-1.5.min.js"></script>
 
