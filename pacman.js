@@ -1294,7 +1294,7 @@ function SaveHighscore(nuevoHighscore) {
             game: 'Pacman',
             event: 'Highscore',
             player: nombreUsuario,
-            Value: nuevoHighscore 
+            value: nuevoHighscore 
         };
 
         console.log('Objeto de datos a enviar:', dataObject);
