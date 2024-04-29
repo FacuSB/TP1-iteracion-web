@@ -967,6 +967,7 @@ var PACMAN = (function () {
 
         if (state === PLAYING) {
             mainDraw();
+            SaveScore(user.theScore())
             SaveHighscore(user.theScore())
             guardarEstadoJuego(user.getLives()); 
 
@@ -1275,21 +1276,51 @@ Object.prototype.clone = function () {
 function SaveHighscore(nuevoHighscore) {
     // Obtener el highscore anterior del localStorage
     const highscoreAnterior = parseInt(localStorage.getItem('highscore')) || 0;
-    const highscore = parseInt(localStorage.getItem('highscore')) || 0;
-  
+
+    console.log('Highscore anterior:', highscoreAnterior);
+    console.log('Nuevo highscore:', nuevoHighscore);
+
     // Verificar si el nuevo highscore es mayor que el anterior
     if (nuevoHighscore > highscoreAnterior) {
-      // Guardar el nuevo highscore en el localStorage
-      localStorage.setItem('highscore', nuevoHighscore);
-      console.log('¡Nuevo highscore guardado!');
-    } else {
-      console.log('El highscore no supera al anterior. No se guarda.');
-    }
-  }
-  function guardarEstadoJuego(vidass) {
+        // Guardar el nuevo highscore en el localStorage
+        localStorage.setItem('highscore', nuevoHighscore);
+        console.log('¡Nuevo highscore guardado!');
 
-      localStorage.setItem('vidas', vidass);
-      console.log('¡Nuevas vidas guardadas!');
+        // Obtener otros datos necesarios del localStorage
+        const nombreUsuario = localStorage.getItem("Username");
+
+        // Construir el objeto de datos a enviar
+        const dataObject = {
+            game: 'Pacman',
+            event: 'Highscore',
+            player: nombreUsuario,
+            Value: nuevoHighscore 
+        };
+
+        console.log('Objeto de datos a enviar:', dataObject);
+
+        // Convertir el objeto a JSON
+        const jsonString = JSON.stringify(dataObject);
+
+        console.log('JSON a enviar:', jsonString);
+
+        // Enviar la información al servidor a través del socket
+        socket.send(jsonString);
+    } else {
+        console.log('El highscore no supera al anterior. No se guarda.');
+    }
+}
+
+
+function SaveScore(score) {
+    // Guardar el puntaje en el localStorage
+    localStorage.setItem('score', score);
+    console.log('Puntaje guardado en localStorage.');
+}
+function guardarEstadoJuego(vidass) {
+
+    localStorage.setItem('vidas', vidass);
+    console.log('¡Nuevas vidas guardadas!');
 
 }
 
@@ -1306,15 +1337,5 @@ function cargarEstadoJuego() {
         console.log('No se encontraron vidas guardadas.');
     }
 }
-
-const socket = new WebSocket("wss://socketsbay.com/wss/v2/1/demo/")
-
-socket.addEventListener("open", function (event){
-    socket.send("Hello World! F");
-});
-
-socket.addEventListener("message", function (event){
-    console.log("message from server", event.data);
-});
 
   
