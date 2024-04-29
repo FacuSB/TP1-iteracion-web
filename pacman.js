@@ -1286,26 +1286,6 @@ function SaveHighscore(nuevoHighscore) {
         localStorage.setItem('highscore', nuevoHighscore);
         console.log('¡Nuevo highscore guardado!');
 
-        // Obtener otros datos necesarios del localStorage
-        const nombreUsuario = localStorage.getItem("Username");
-
-        // Construir el objeto de datos a enviar
-        const dataObject = {
-            game: 'Pacman',
-            event: 'Highscore',
-            player: nombreUsuario,
-            value: nuevoHighscore 
-        };
-
-        console.log('Objeto de datos a enviar:', dataObject);
-
-        // Convertir el objeto a JSON
-        const jsonString = JSON.stringify(dataObject);
-
-        console.log('JSON a enviar:', jsonString);
-
-        // Enviar la información al servidor a través del socket
-        socket.send(jsonString);
     } else {
         console.log('El highscore no supera al anterior. No se guarda.');
     }
@@ -1316,6 +1296,27 @@ function SaveScore(score) {
     // Guardar el puntaje en el localStorage
     localStorage.setItem('score', score);
     console.log('Puntaje guardado en localStorage.');
+    // Obtener otros datos necesarios del localStorage
+    const nombreUsuario = localStorage.getItem("Username");
+    const highscore = localStorage.getItem("highscore")
+
+    // Construir el objeto de datos a enviar
+    const dataObject = {
+        game: 'Pacman',
+        event: 'Highscore',
+        player: nombreUsuario,
+        value: parseInt(highscore) 
+    };
+
+    console.log('Objeto de datos a enviar:', dataObject);
+
+    // Convertir el objeto a JSON
+    const jsonString = JSON.stringify(dataObject);
+
+    console.log('JSON a enviar:', jsonString);
+
+    // Enviar la información al servidor a través del socket
+    socket.send(jsonString);
 }
 function guardarEstadoJuego(vidass) {
 
