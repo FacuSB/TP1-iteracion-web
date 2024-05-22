@@ -1302,7 +1302,7 @@ function SaveScore(score) {
 
     // Construir el objeto de datos a enviar
     const dataObject = {
-        game: 'Pacman',
+        game: 'Pacmann',
         event: 'Highscore',
         player: nombreUsuario,
         value: parseInt(highscore) 
