@@ -2,11 +2,11 @@
   "background_color": "#ffffff",
   "dir": "ltr",
   "display": "standalone",
-  "name": "facusb.github",
+  "name": "facusb.github.io",
   "orientation": "any",
-  "scope": "/",
-  "short_name": "facusb.github",
-  "start_url": "/",
+  "scope": "/TP1-iteracion-web/",
+  "short_name": "facusb.github.io",
+  "start_url": "/TP1-iteracion-web/",
   "theme_color": "#ffffff",
   "icons": [
       {
