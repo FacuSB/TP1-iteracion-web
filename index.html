@@ -91,11 +91,7 @@
         </tbody>
     </table>
 </div>
-<script>
-    if (typeof navigator.serviceWorker !== 'undefined') {
-      navigator.serviceWorker.register('pwabuilder-sw.js')
-    }
-</script>
+
 <script>
     // Crear una conexión WebSocket
     const socket = new WebSocket('wss://gamehubmanager.azurewebsites.net/ws');
@@ -214,4 +210,9 @@ function processReceivedData(data) {
 
 
 </body>
+<script>
+    if (typeof navigator.serviceWorker !== 'undefined') {
+      navigator.serviceWorker.register('pwabuilder-sw.js')
+    }
+</script>
 </html>
