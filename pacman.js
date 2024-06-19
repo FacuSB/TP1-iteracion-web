@@ -852,7 +852,7 @@ var PACMAN = (function () {
     }
 
     function keyDown(e) {
-        document.addEventListener('touchstart', function(e) {
+        document.addEventListener('click', function(e) {
             startNewGame();
         }, { once: true });
         if (e.keyCode === KEY.N) {
