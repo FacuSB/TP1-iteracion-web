@@ -290,6 +290,22 @@ Pacman.User = function (game, map) {
     keyMap[KEY.ARROW_UP]    = UP;
     keyMap[KEY.ARROW_RIGHT] = RIGHT;
     keyMap[KEY.ARROW_DOWN]  = DOWN;
+    window.addEventListener('deviceorientation', function(event) {
+        var tiltLR = event.gamma;
+        var tiltFB = event.beta;
+
+        if (tiltLR < -10) {
+            due = LEFT;
+        } else if (tiltLR > 10) {
+            due = RIGHT;
+        }
+
+        if (tiltFB > 10) {
+            due = DOWN;
+        } else if (tiltFB < -10) {
+            due = UP;
+        }
+    });
 
     function addScore(nScore) { 
         score += nScore;
@@ -303,6 +319,7 @@ Pacman.User = function (game, map) {
     };
 
     function loseLife() { 
+        navigator.vibrate(200);
         lives -= 1;
     };
 
@@ -1338,5 +1355,3 @@ function cargarEstadoJuego() {
         console.log('No se encontraron vidas guardadas.');
     }
 }
-
-  
