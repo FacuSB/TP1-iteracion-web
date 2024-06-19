@@ -850,11 +850,12 @@ var PACMAN = (function () {
         map.draw(ctx);
         startLevel();
     }
-
+    function onScreenTap() {
+        console.log('Pantalla tocada/clickeada'); // Mensaje de depuración
+        startNewGame(); // Iniciar el juego
+    }
     function keyDown(e) {
-        document.addEventListener('click', function(e) {
-            startNewGame();
-        }, { once: true });
+
         if (e.keyCode === KEY.N) {
             startNewGame();
         } else if (e.keyCode === KEY.S) {
@@ -873,6 +874,7 @@ var PACMAN = (function () {
         } else if (state !== PAUSE) {   
             return user.keyDown(e);
         }
+        
         return true;
     }    
 
@@ -931,6 +933,10 @@ var PACMAN = (function () {
         map.drawBlock(Math.floor(pos.y/10), Math.floor(pos.x/10), ctx);
         map.drawBlock(Math.ceil(pos.y/10), Math.ceil(pos.x/10), ctx);
     }
+    function onScreenTap() {
+        console.log('Pantalla tocada/clickeada'); // Mensaje de depuración
+        startNewGame(); // Iniciar el juego
+    }
 
     function mainDraw() { 
 
@@ -974,9 +980,17 @@ var PACMAN = (function () {
             }
         }                             
     };
+    function startGameOnClick() {
+        startNewGame(); // Iniciar el juego
+    }
+    
+    // Asegúrate de que el contenido de la página esté cargado antes de agregar el detector de eventos
+    document.addEventListener('DOMContentLoaded', function() {
+        // Obtener el botón por su ID y agregar un detector de eventos de clic
+        document.getElementById('startGameButton').addEventListener('click', startGameOnClick);
+    });
 
     function mainLoop() {
-
         var diff;
           
         if (state !== PAUSE) { 
