@@ -319,7 +319,7 @@ Pacman.User = function (game, map) {
     };
 
     function loseLife() { 
-        navigator.vibrate(200);
+        
         lives -= 1;
     };
 
@@ -974,6 +974,7 @@ var PACMAN = (function () {
                     timerStart = tick;
                 } else if (ghosts[i].isDangerous()) {
                     audio.play("die");
+                    navigator.vibrate(2000);
                     setState(DYING);
                     timerStart = tick;
                 }
